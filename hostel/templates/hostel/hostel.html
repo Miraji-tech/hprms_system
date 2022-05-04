@@ -1,0 +1,80 @@
+{% extends 'users/base.html' %}
+
+
+{% block title %}
+    HPRMS | Hostel
+{% endblock title %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Hostel</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<section style="padding-left: 5px; padding-right: 5px;">
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><i>Hostel</i></h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>INDEX No</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Created By</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for htl in hostel %}
+        <tr style="background-color: #fff;">
+              <td>
+                  <strong>
+                      {{ forloop.counter }}
+                  </strong>
+              </td>
+              <td>{{htl.id}}</td>
+              <td>{{htl.name}}</td>
+              <td>{{htl.location}}</td>
+              <td>{{htl.created_by}}</td>
+              <td>
+                <a href="{% url 'update-hostel' htl.id %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'delete-hostel' htl.id %}" class="btn btn-danger">Delete</a>
+              </td>
+
+            </tr>
+
+        {% endfor %}
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>INDEX No</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Created By</th>
+        <th>Action</th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+</section>
+{% endblock content %}

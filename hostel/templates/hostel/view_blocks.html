@@ -1,0 +1,81 @@
+{% extends 'users/base.html' %}
+
+
+{% block title %}
+    HPRMS | Hostel Blocks
+{% endblock title %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Hostel Blocks</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<section style="padding-left: 5px; padding-right: 5px;">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><i>Hostel Blocks</i></h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>INDEX No</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Hostel</th>
+            <th>Created_by</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+            {% for view_htl_block in hostel_block %}
+            <tr style="background-color: #fff;">
+                  <td>
+                      <strong>
+                          {{ forloop.counter }}
+                      </strong>
+                  </td>
+                  <td>{{view_htl_block.id}}</td>
+                  <td>{{view_htl_block.block_name}}</td>
+                  <td>{{view_htl_block.hostel_name}}</td>
+                  <td>{{view_htl_block.created_by}}</td>
+                  <td>
+                    <a href="{% url 'update-block' view_htl_block.id %}" class="btn btn-primary">Update</a>
+                    <a href="{% url 'delete-block' view_htl_block.id %}" class="btn btn-danger">Delete</a>
+                  </td>
+
+                </tr>
+    
+            {% endfor %}
+          </tbody>
+          <tfoot>
+          <tr>
+            <th>INDEX No</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Created_by</th>
+            <th>Action</th>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    </section>
+    {% endblock content %}
+    

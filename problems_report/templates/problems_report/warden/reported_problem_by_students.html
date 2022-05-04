@@ -1,0 +1,88 @@
+{% extends 'users/base.html' %}
+
+
+{% block title %}
+    HPRMS | Students Problem reports
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="content-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+          <li class="breadcrumb-item active">Students Problem report</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+
+<section style="padding-left: 5px; padding-right: 5px;">
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><i>Students reports</i></h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>INDEX No</th>
+        <th>ID</th>
+        <th>Problem type</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Student</th>
+        <th>Feedback</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for reports in student_report_problem %}
+        <tr style="background-color: #fff;">
+              <td>
+                  <strong>
+                      {{ forloop.counter }}
+                  </strong>
+              </td>
+              <td>{{reports.id}}</td>
+              <td>{{reports.problem_type}}</td>
+              <td>{{reports.description}}</td>
+              {% if reports.image %}
+              <td>
+                <img src="{{ reports.image.url }}" alt="Image problem" width="61px" height="82px">
+              </td>
+              {% endif %}
+              <td>{{reports.student}}</td>
+              <td>{{reports.feedback}}</td>
+              <td>
+                <a href="{% url 'student_feedback_Form' reports.id %}" class="btn btn-primary">View</a>
+            </td>
+
+            </tr>
+
+        {% endfor %}
+      </tbody>
+      <tfoot>
+      <tr>
+        <th>INDEX No</th>
+        <th>ID</th>
+        <th>Problem type</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Student</th>
+        <th>Feedback</th>
+        <th>Action</th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+  <!-- /.card-body -->
+</div>
+</section>
+{% endblock content %}

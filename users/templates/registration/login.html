@@ -1,0 +1,42 @@
+{% extends 'users/index.html'%}
+{% block title %}Login{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+      <!-- Navbar -->
+<section class="h-100 h-custom">
+  <div id="login">
+  <div class="container py-3 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100 mt-5 pt-5">
+      <div class="card col-lg-4">
+        <div class="card-header">
+          <h3 class="card-title">
+            Login Form
+          </h3>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content p-0">
+
+              <form id="login-form" method="post" action="">{% csrf_token %}
+
+                            {{ form|crispy }}
+
+                            <div class="form-group">
+                                <div class="mb-3">
+                                <a href="{% url 'password_reset' %}">Forgot password</a>
+                                </div>
+                                <input type="submit" name="submit" class="btn btn-primary btn-md" value="Login">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+</section>
+
+
+{% endblock %}

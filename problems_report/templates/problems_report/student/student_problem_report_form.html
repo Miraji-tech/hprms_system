@@ -1,0 +1,101 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+
+
+        {% block title %}
+            HPRMS | student problem report form
+        {% endblock title %}
+    
+
+{% block content %}
+{% load static %}
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+              <li class="breadcrumb-item active"><i>Student problem report form</i></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+<section class="h-100 h-custom" style="padding-left: 100px;">
+
+              <div class="card col-lg-10">
+                    <div class="card-header">
+                      <h3 class="card-title">
+                        <i>Student problem report form</i>
+                      </h3>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                      <div class="tab-content p-0">
+
+                        {% if messages %}
+                        {% for message in messages %}
+
+                        <div class="alert alert-success">
+                        {{ message }}
+
+                        <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    </div>
+                        {% endfor %}
+                        {% endif %}
+
+                  <form class="px-md-2" method="POST" action="#">{% csrf_token %}
+
+                  <!--                {{ form|crispy }}-->
+
+                    <input type="hidden" name="student" value="1" id="id_student" class="form-control" required>
+
+                    <!-- <div class="row">
+                      <div class="form-group mb-2 col-md-6">
+                        <label>Hostel</label>
+                        {{ form.hostel }}
+                      </div>
+    
+                      <div class="form-group mb-2 col-md-6">
+                        <label>Block</label>
+                        {{ form.block }}
+                      </div>
+                    </div> -->
+
+                  <div class="mb-3">
+                  <label for="problem_type">Problem type</label>
+                  <select class="form-control col-md-12" name="problem_type" id="problem_type" required>
+                    <option name="problem_type" disabled selected="selected">---Select Option---</option>
+                    <option name="problem_type">Emergency problem</option>
+                    <option name="problem_type">Annual problem</option>
+                    <option name="problem_type">Sick problem</option>
+                    <option name="problem_type">Maternity problem</option>
+                    <option name="problem_type">Paternity problem</option>
+                  </select>
+                    </div>
+
+
+                  <div class="mb-4">
+                  <label for="description">Description</label>
+                  <textarea name="description" class="form-control" id="description" required>
+                  </textarea>
+                  </div>
+
+                  <div class="form-group mb-2">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image" class="form-control" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-lg mb-1">Submit</button>
+
+                  </form>
+
+                      </div>
+                    </div><!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+</section>
+{% endblock content %}

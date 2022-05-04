@@ -1,0 +1,76 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+
+
+        {% block title %}
+            HPRMS |    Register Hostel Block
+        {% endblock title %}
+    
+
+{% block content %}
+{% load static %}
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+              <li class="breadcrumb-item active"><i>Register Hostel Block</i></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+<section class="h-100 h-custom" style="padding-left: 100px;">
+
+              <div class="card col-lg-10">
+                    <div class="card-header">
+                      <h3 class="card-title">
+                        <i>Register Hostel Block</i>
+                      </h3>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                      <div class="tab-content p-0">
+
+                        {% if messages %}
+                        {% for message in messages %}
+
+                        <div class="alert alert-success">
+                        {{ message }}
+
+                        <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    </div>
+                        {% endfor %}
+                        {% endif %}
+
+                  <form class="px-md-2" method="POST" action="#">{% csrf_token %}
+
+                  <!--                {{ form|crispy }}-->
+
+                    <input type="hidden" name="created_by" value="1" id="id_created_by" class="form-control" required>
+
+                      <div class="form-group mb-2">
+                        <label for="block_name">Block Name</label>
+                        <input type="text" name="block_name" id="block_name" class="form-control" required>
+                      </div>
+    
+                      <div class="form-group mb-2">
+                        <label for="location">hostel</label>
+                        {{ form.hostel_name }}
+                      </div>
+
+                  <button type="submit" class="btn btn-primary btn-lg mb-1">Submit</button>
+
+                  </form>
+
+                      </div>
+                    </div><!-- /.card-body -->
+                  </div>
+                  <!-- /.card -->
+</section>
+{% endblock content %}
+

@@ -38,7 +38,7 @@ def warden_reports(request):
     return render(request, 'problems_report/warden/warden_problem_report_form.html', {'form': form})
 
 
-# A problem reported by a specific student  function
+# A problem reported by a specific student function
 def view_student_reports(request):
 
     spr = student_report_problem.objects.filter(student_id=request.user.id)
@@ -66,7 +66,7 @@ def warden_reported_problem(request):
 # All problems reported by all students
 def view_reported_problem(request):
 
-    reports = student_report_problem.objects.all()
+    reports = student_report_problem.objects.all().filters()
 
     context = {
 

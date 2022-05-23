@@ -1,0 +1,79 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+
+
+        {% block title %}
+            HPRMS |   Allocate Block to warden
+        {% endblock title %}
+    
+
+{% block content %}
+{% load static %}
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+              <li class="breadcrumb-item active"><i>Allocate Block to warden</i></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+<section class="h-100 h-custom" style="padding-left: 100px;">
+
+              <div class="card col-lg-10">
+                    <div class="card-header">
+                      <h3 class="card-title">
+                        <i>Allocate Block to warden</i>
+                      </h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="tab-content p-0">
+
+                        {% if messages %}
+                        {% for message in messages %}
+
+                        <div class="alert alert-success">
+                        {{ message }}
+
+                        <button class="closebtn" onclick="this.parentElement.style.display='none';">&times;</button>
+                    </div>
+                        {% endfor %}
+                        {% endif %}
+
+                  <form class="px-md-2" method="POST" action="#">{% csrf_token %}
+
+                  <!--                {{ form|crispy }}-->
+
+                      <div class="form-group mb-2">
+                        <label for="warden">Warden Name</label>
+                        {{ form.warden }}
+                      </div>
+
+                      <div class="form-group mb-2">
+                        <label for="block_name">Block name</label>
+                        {{ form.block_name }}
+                      </div>
+
+                      <div class="form-group mb-2">
+                        <label for="hostel_name">Hostel name</label>
+                        {{ form.hostel_name }}
+                      </div>
+
+                  <button type="submit" class="btn btn-primary btn-lg mb-1">Submit</button>
+
+                  </form>
+
+                      </div>
+                    </div>
+                  </div>
+                  
+</section>
+{% endblock content %}
+

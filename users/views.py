@@ -19,8 +19,8 @@ def homepage(request):
     hostels_count = hostel.objects.count()
     warden_report_count = warden_report_problem.objects.count()
     block_students_report_count = student_report_problem.objects.count()
-    students_report_count = student_report_problem.objects.filter(id=request.user.id).count()
-    only_warden_report_count = warden_report_problem.objects.filter(id=request.user.id).count()
+    students_report_count = student_report_problem.objects.filter(student_id=request.user.id).count()
+    only_warden_report_count = warden_report_problem.objects.filter(warden_id=request.user.id).count()
 
     context = {
         'students_count' : students_count,

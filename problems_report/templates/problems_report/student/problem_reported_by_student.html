@@ -2,7 +2,7 @@
 
 
 {% block title %}
-    HPRMS | Student Problem reports
+    HPRMS | Student Incidence reported
 {% endblock title %}
 
 {% load static %}
@@ -15,7 +15,7 @@
       <div class="col-sm-12">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
-          <li class="breadcrumb-item active">{{ user.username }} report</li>
+          <li class="breadcrumb-item active">{{ user.username }} Incidence reported</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -25,7 +25,7 @@
 <section style="padding-left: 5px; padding-right: 5px;">
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title"><i>{{ user.username }} report</i></h3>
+    <h3 class="card-title"><i>{{ user.username }} Incidence reported</i></h3>
   </div>
   <!-- /.card-header -->
   <div class="card-body">
@@ -38,6 +38,9 @@
         <th>Description</th>
         <th>Image</th>
         <th>Student</th>
+        <th>Hostel</th>
+        <th>Block</th>
+        <th>Room</th>
         <th>Feedback</th>
       </tr>
       </thead>
@@ -54,26 +57,31 @@
               <td>{{spr.description}}</td>
                {% if spr.image %}
               <td>
-                <img src="{{ spr.image.url }}" alt="Image problem" width="61px" height="82px">
+                <img src="{{ spr.image.url }}" alt="Image problem" width="100px" height="50px">
+              </td>
+              {% else %}
+              <td>
+                Null
               </td>
               {% endif %}
               <td>{{spr.student}}</td>
+              <td>{{spr.hostel}}</td>
+              <td>{{spr.block_name}}</td>
+              <td>{{spr.room_name}}</td>
+              <td>
+                {% if spr.feedback == 0 %}
+                <I>Received, Waiting for feedback </I>
+                {% elif spr.feedback == 1 %}
+                <I class="text-success">Your Incident has been solved</I>
+                {% elif spr.feedback == 2 %}
+                <I class="text-danger">Please visit Usab Manager for more help</I>
+                {% endif %}
+              </td>
 
             </tr>
 
         {% endfor %}
       </tbody>
-      <tfoot>
-      <tr>
-        <th>INDEX No</th>
-        <th>ID</th>
-        <th>Problem type</th>
-        <th>Description</th>
-        <th>Image</th>
-        <th>Student</th>
-        <th>Feedback</th>
-      </tr>
-      </tfoot>
     </table>
   </div>
   <!-- /.card-body -->

@@ -47,23 +47,17 @@
                         {% endfor %}
                         {% endif %}
 
-                  <form class="px-md-2" method="POST" action="#">{% csrf_token %}
+                  <form class="px-md-2" method="POST" enctype="multipart/form-data" action="#">{% csrf_token %}
 
                   <!--                {{ form|crispy }}-->
 
                     <input type="hidden" name="student" value="1" id="id_student" class="form-control" required>
 
-                    <!-- <div class="row">
-                      <div class="form-group mb-2 col-md-6">
-                        <label>Hostel</label>
-                        {{ form.hostel }}
-                      </div>
-    
-                      <div class="form-group mb-2 col-md-6">
-                        <label>Block</label>
-                        {{ form.block }}
-                      </div>
-                    </div> -->
+                    <input type="hidden" name="hostel" value="1" id="id_hostel" class="form-control" required>
+
+                    <input type="hidden" name="block_name" value="1" id="id_block_name" class="form-control" required>
+
+                    <input type="hidden" name="room_name" value="1" id="id_room_name" class="form-control" required>
 
                   <div class="mb-3">
                   <label for="problem_type">Problem type</label>
@@ -78,16 +72,37 @@
                     </div>
 
 
-                  <div class="mb-4">
+                  <div class="mb-2">
                   <label for="description">Description</label>
                   <textarea name="description" class="form-control" id="description" required>
                   </textarea>
                   </div>
+                </div> 
 
                   <div class="form-group mb-2">
                     <label for="image">Image</label>
-                    <input type="file" name="image" id="image" class="form-control" required>
+                    <input type="file" name="image" id="image" class="form-control">
+                    <small>image format should be in .png, .jpg </small>
                   </div>
+
+                  <!-- <div class="form-group mb-2">
+                    <label>Hostel</label>
+                    {{ form.hostel }}
+                  </div>
+
+                  <div class="row">
+  
+                    <div class="form-group mb-2 col-md-6">
+                      <label>Block</label>
+                      {{ form.block_name }}
+                    </div>
+
+                    <div class="form-group mb-2 col-md-6">
+                      <label>Room</label>
+                      {{ form.room_name }}
+                    </div>
+                  </div> -->
+
 
                   <button type="submit" class="btn btn-primary btn-lg mb-1">Submit</button>
 

@@ -50,6 +50,10 @@
           <td>
             <img src="{{ student_report_problem.image.url }}" alt="Image problem" width="61px" height="82px">
           </td>
+          {% else %}
+          <td>
+            Null
+          </td>
           {% endif %}
         </tr>
         <tr style="background-color: #fff;">
@@ -59,12 +63,24 @@
         <tr style="background-color: #fff;">
           <th>Feedback</th>
           <td>
-            <form action="#" method="post">{% csrf_token %}
-            <div class="mb-3">
-            <textarea name="feedback" id="id_feedback" class="form-control"></textarea>
-            </div>
-            <input type="submit" class="btn btn-primary" value="submit">
-          </form>
+              {% if user.is_staff and not superuser  %}
+                {% if student_report_problem.feedback == 0 %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default">Action</button>
+                  <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                    <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div class="dropdown-menu" role="menu">
+                    <a href="{% url 'problem-solved' problem_id=student_report_problem.id %}" class="btn btn-green">Your problem has been solved</a><hr>
+                    <a href="{% url 'problem-goahead' problem_id=student_report_problem.id %}" class="btn btn-green">Please report to  Usab Manager for more help</a>
+                  </div>
+                </div>
+                  {% elif student_report_problem.feedback == 1 %}
+              <strong><I class="text-success">Your Incident has been solved</I></strong>
+                  {% else %}
+              <strong><I class="text-danger">Please visit Usab Manager for more help</I></strong>
+                 {% endif %}
+              {% endif %}
           </td>
         </tr>
         </thead>

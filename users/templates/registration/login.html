@@ -2,6 +2,7 @@
 {% block title %}Login{% endblock %}
 {% load crispy_forms_tags %}
 
+{% load static %}
 {% block content %}
 
       <!-- Navbar -->
@@ -10,6 +11,7 @@
   <div class="container py-3 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100 mt-5 pt-5">
       <div class="card col-lg-4">
+        <img src="{% static 'users/dist/img/udsm logo.png' %}" alt="Udsm logo" height="80px" width="60px" style="margin-left: auto; margin-right:auto;" class="pt-2">
         <div class="card-header">
           <h3 class="card-title">
             Login Form

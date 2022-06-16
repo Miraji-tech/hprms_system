@@ -1,24 +1,26 @@
+from unicodedata import name
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-
+from django.db.models import F
 from hostel.models import allocate_block, allocate_room, hostel, hostel_block, room
 from .forms import studentReportProblemForm, wardenReportProblemForm, sendFeedbackForm
 from .models import student_report_problem, warden_report_problem
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 @login_required
 def student_reports(request):
-
-    # hostel = allocate_room.objects.get(hostel_name = hostel)
-    # block = allocate_room.objects.get(block_name = block)
-    # room = allocate_room.objects.get(room_name = room)
-
+ 
     form = studentReportProblemForm(request.POST, request.FILES)
+
+    # hostel__ = allocate_room.objects.filter(hostel_name_id = F('id'))
+    # block__ = allocate_room.objects.filter(block_name_id = F('id'))
+    room__ = allocate_room.objects.filter(room_id = F('id'),block_name_id = F('id'), hostel_name_id = F('id'), student_id = request.user.id )
 
     if form.is_valid():
         form.save()
@@ -32,26 +34,41 @@ def student_reports(request):
 
         return redirect('student_report_problem')
 
-    return render(request, 'problems_report/student/student_problem_report_form.html', {'form': form})
+    context = {
+        'form': form,
+        'allocate_room' : room__,
+        # 'allocate_room' : hostel__,
+        # 'allocate_room' : block__,
+        }
+
+    return render(request, 'problems_report/student/student_problem_report_form.html', context)
 
 
 def warden_reports(request):
+
+    block__ = allocate_block.objects.filter(block_name_id = F('id'), hostel_name_id = F('id'), warden_id = request.user.id )
     form = wardenReportProblemForm(request.POST)
     if form.is_valid():
         form.save()
         instance = form.save(commit=False)
         instance.warden = request.user
+        instance.hostel = instance.hostel
+        instance.block_name = instance.block_name
         instance.save()
         messages.success(request, "Your problem has been reported successfully")
 
         return redirect('warden_report_problem')
 
-    return render(request, 'problems_report/warden/warden_problem_report_form.html', {'form': form})
+    context = {
+        'form': form,
+        'allocate_block':block__,
+    }
+
+    return render(request, 'problems_report/warden/warden_problem_report_form.html', context)
 
 
 # A problem reported by a specific student function
 def view_student_reports(request):
-
 
     spr = student_report_problem.objects.filter(student_id=request.user.id)
 

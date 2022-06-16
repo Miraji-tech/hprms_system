@@ -36,7 +36,8 @@
         <th>ID</th>
         <th>Problem title</th>
         <th>Details</th>
-        <th>Warden</th>
+        <th>Hostel</th>
+        <th>Block</th>
         {% if user.is_authenticated and user.is_superuser %}
         <th>Action</th>
         {% endif %}
@@ -53,7 +54,8 @@
               <td>{{wpr.id}}</td>
               <td>{{wpr.problem_title}}</td>
               <td>{{wpr.details}}</td>
-              <td>{{wpr.warden}}</td>
+              <td>{{wpr.hostel}}</td>
+              <td>{{wpr.block_name}}</td>
               {% if user.is_authenticated and user.is_superuser %}
               <td>
                 <a href="{% url 'feedback_Form' wpr.id %}" class="btn btn-primary">View</a>
@@ -64,18 +66,6 @@
 
         {% endfor %}
       </tbody>
-      <tfoot>
-      <tr>
-        <th>INDEX No</th>
-        <th>ID</th>
-        <th>Problem title</th>
-        <th>Details</th>
-        <th>Warden</th>
-        {% if user.is_authenticated and user.is_superuser %}
-        <th>Action</th>
-        {% endif %}
-      </tr>
-      </tfoot>
     </table>
   </div>
   <!-- /.card-body -->

@@ -1,5 +1,4 @@
-{% extends 'users/base.html' %}
-
+{% extends 'users/basetable.html' %}
 
 {% block title %}
     HPRMS | Wardens reports
@@ -64,18 +63,6 @@
 
         {% endfor %}
       </tbody>
-      <tfoot>
-      <tr>
-        <th>INDEX No</th>
-        <th>ID</th>
-        <th>Problem title</th>
-        <th>Details</th>
-        <th>Warden</th>
-        {% if user.is_authenticated and user.is_superuser %}
-        <th>Action</th>
-        {% endif %}
-      </tr>
-      </tfoot>
     </table>
   </div>
   <!-- /.card-body -->

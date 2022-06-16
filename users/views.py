@@ -8,7 +8,7 @@ from .forms import UserRegisterForm, WardenRegisterForm
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.template.loader import render_to_string
-from hostel.models import hostel
+from hostel.models import hostel, room
 from problems_report.models import warden_report_problem, student_report_problem
 
 # Create your views here.
@@ -19,6 +19,8 @@ def homepage(request):
     hostels_count = hostel.objects.count()
     warden_report_count = warden_report_problem.objects.count()
     block_students_report_count = student_report_problem.objects.count()
+    recent_incidences = student_report_problem.objects.all()
+    statistics = hostel.objects.all()
     students_report_count = student_report_problem.objects.filter(student_id=request.user.id).count()
     only_warden_report_count = warden_report_problem.objects.filter(warden_id=request.user.id).count()
 
@@ -30,6 +32,8 @@ def homepage(request):
         'students_report_count' : students_report_count,
         'only_warden_report_count' :  only_warden_report_count,
         'block_students_report_count' : block_students_report_count,
+        'student_report_problem' : recent_incidences,
+        'statistics' : statistics,
     }
 
     return render(request, 'users/dashboard.html', context)

@@ -36,7 +36,7 @@ class wardenReportProblemForm(forms.ModelForm):
 
     class Meta:
         model = warden_report_problem
-        fields = ('warden', 'problem_title', 'details', 'hostel', 'block_name')
+        fields = ('warden', 'problem_title', 'details', 'hostel', 'block_name','feedback')
 
 
     # student problem report form

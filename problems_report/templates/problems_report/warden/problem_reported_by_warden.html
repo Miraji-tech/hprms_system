@@ -38,6 +38,7 @@
         <th>Details</th>
         <th>Hostel</th>
         <th>Block</th>
+        <th>Feedback</th>
         {% if user.is_authenticated and user.is_superuser %}
         <th>Action</th>
         {% endif %}
@@ -56,6 +57,15 @@
               <td>{{wpr.details}}</td>
               <td>{{wpr.hostel}}</td>
               <td>{{wpr.block_name}}</td>
+              <td>
+                {% if wpr.feedback == 0 %}
+                <I>Received, Waiting for feedback </I>
+                {% elif wpr.feedback == 1 %}
+                <I class="text-success">Your Incident has been solved</I>
+                {% elif wpr.feedback == 2 %}
+                <I class="text-danger">We are working on it</I>
+                {% endif %}
+              </td>
               {% if user.is_authenticated and user.is_superuser %}
               <td>
                 <a href="{% url 'feedback_Form' wpr.id %}" class="btn btn-primary">View</a>

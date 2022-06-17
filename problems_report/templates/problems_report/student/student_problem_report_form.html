@@ -50,16 +50,16 @@
                   <form class="px-md-2" method="POST" enctype="multipart/form-data" action="#">{% csrf_token %}
 
                   <!--                {{ form|crispy }}-->
-                  
-                    <input type="hidden" name="student" value="1" id="id_student" class="form-control" required>
-
-                    {% for rm in allocate_room %}
-                    <input type="hidden" name="hostel" value="{{ rm.hostel_name_id }}" id="id_hostel" class="form-control" required>
-
-                    <input type="hidden" name="block_name" value="{{rm.block_name_id}}" id="id_block_name" class="form-control" required>
+                  {% for rm in allocate_room %}
+                    <input type="hidden" name="student" value="{{ rm.student_id }}" id="id_student" class="form-control" required>
 
                     
-                    <input type="hidden" name="room_name" value="{{rm.room_id}}" id="id_room_name" class="form-control" required>
+                    <input type="hidden" name="hostel" value="{{ rm.hostel_name_id }}" id="id_hostel" class="form-control" required>
+
+                    <input type="hidden" name="block_name" value="{{ rm.block_name_id }}" id="id_block_name" class="form-control" required>
+
+                    
+                    <input type="hidden" name="room_name" value="{{ rm.room_id }}" id="id_room_name" class="form-control" required>
                     {% endfor %}
 
                   <div class="mb-3">

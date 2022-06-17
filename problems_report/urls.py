@@ -28,5 +28,7 @@ urlpatterns = [
     path('feedback_Form/<str:problem_id>', views.warden_problem_feedback_form, name='feedback_Form'),
     path('view_students_problems/', views.usab_manager_view_students_problem, name='view_students_problems'),
     path('feedback/<str:problem_id>', views.problem_approve, name='problem-solved'),
-    path('feedback-goahead/<str:problem_id>', views.problem_decline, name='problem-goahead')
+    path('feedback-goahead/<str:problem_id>', views.problem_decline, name='problem-goahead'),
+    path('wdfeedback/<str:problem_id>', views.wd_problem_approve, name='problem-cleared'),
+    path('wdfeedback-goahead/<str:problem_id>', views.wd_problem_decline, name='problem-not-cleared')
 ]

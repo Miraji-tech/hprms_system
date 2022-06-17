@@ -38,6 +38,9 @@
         <th>Description</th>
         <th>Image</th>
         <th>Student</th>
+        <th>Hostel</th>
+        <th>Block</th>
+        <th>Room</th>
         <th>Feedback</th>
       </tr>
       </thead>
@@ -62,6 +65,9 @@
               </td>
               {% endif %}
               <td>{{reports.student}}</td>
+              <td>{{reports.hostel}}</td>
+              <td>{{reports.block_name}}</td>
+              <td>{{reports.room_name}}</td>
               <td>
                 {% if reports.feedback == 0 %}
                 <I>Received, Waiting for feedback </I>

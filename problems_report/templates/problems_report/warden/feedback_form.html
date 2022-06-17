@@ -61,6 +61,18 @@
           <td>{{student_report_problem.student}}</td>
         </tr>
         <tr style="background-color: #fff;">
+          <th>Hostel</th>
+          <td>{{student_report_problem.hostel}}</td>
+        </tr>
+        <tr style="background-color: #fff;">
+          <th>Block</th>
+          <td>{{student_report_problem.block_name}}</td>
+        </tr>
+        <tr style="background-color: #fff;">
+          <th>Room</th>
+          <td>{{student_report_problem.room_name}}</td>
+        </tr>
+        <tr style="background-color: #fff;">
           <th>Feedback</th>
           <td>
               {% if user.is_staff and not superuser  %}

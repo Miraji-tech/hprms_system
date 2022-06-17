@@ -195,3 +195,19 @@ def problem_decline(request, problem_id):
     srp_decline.feedback = 2
     srp_decline.save()
     return HttpResponseRedirect(reverse("view_students_reported_problems"))
+
+
+@login_required
+def wd_problem_approve(request, problem_id):
+    wrp = warden_report_problem.objects.get(id=problem_id)
+    wrp.feedback = 1
+    wrp.save()
+    return HttpResponseRedirect(reverse("wardens_report"))
+
+
+@login_required
+def wd_problem_decline(request, problem_id):
+    wrp_decline = warden_report_problem.objects.get(id=problem_id)
+    wrp_decline.feedback = 2
+    wrp_decline.save()
+    return HttpResponseRedirect(reverse("wardens_report"))

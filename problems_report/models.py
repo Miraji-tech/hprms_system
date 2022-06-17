@@ -28,6 +28,7 @@ class warden_report_problem(models.Model):
     details = models.CharField(max_length=500)
     hostel = models.ForeignKey(hostel, default='', on_delete=models.CASCADE)
     block_name = models.ForeignKey(hostel_block, default='', on_delete=models.CASCADE)
+    feedback = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()

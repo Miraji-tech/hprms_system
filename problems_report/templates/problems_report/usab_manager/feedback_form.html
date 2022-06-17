@@ -49,15 +49,35 @@
           <td>{{warden_report_problem.warden}}</td>
         </tr>
         <tr style="background-color: #fff;">
+          <th>Hostel</th>
+          <td>{{warden_report_problem.hostel}}</td>
+        </tr>
+        <tr style="background-color: #fff;">
+          <th>Block</th>
+          <td>{{warden_report_problem.block_name}}</td>
+        </tr>
+        <tr style="background-color: #fff;">
           <th>Feedback</th>
           <td>
-            <form action="#" method="post">{% csrf_token %}
-            <div class="mb-3">
-            <textarea name="feedback" id="id_feedback" class="form-control"></textarea>
-            </div>
-            <input type="submit" class="btn btn-primary" value="submit">
-          </form>
-          </td>
+            {% if user.is_superuser  %}
+              {% if warden_report_problem.feedback == 0 %}
+              <div class="btn-group">
+                <button type="button" class="btn btn-default">Action</button>
+                <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu" role="menu">
+                  <a href="{% url 'problem-cleared' problem_id=warden_report_problem.id %}" class="btn btn-green">Your problem has been solved</a><hr>
+                  <a href="{% url 'problem-not-cleared' problem_id=warden_report_problem.id %}" class="btn btn-green">We are working on it</a>
+                </div>
+              </div>
+                {% elif warden_report_problem.feedback == 1 %}
+            <strong><I class="text-success">Your Incident has been solved</I></strong>
+                {% else %}
+            <strong><I class="text-secondary">We are working on it</I></strong>
+               {% endif %}
+            {% endif %}
+        </td>
         </tr>
         </thead>
         </tbody>

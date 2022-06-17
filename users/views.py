@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import F
+from hostel.models import allocate_room
 from .forms import UserRegisterForm, WardenRegisterForm
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -18,7 +20,7 @@ def homepage(request):
     staff_count = User.objects.filter(is_staff=1).count()
     hostels_count = hostel.objects.count()
     warden_report_count = warden_report_problem.objects.count()
-    block_students_report_count = student_report_problem.objects.count()
+    block_students_report_count = student_report_problem.objects.all().count()
     recent_incidences = student_report_problem.objects.all()
     statistics = hostel.objects.all()
     students_report_count = student_report_problem.objects.filter(student_id=request.user.id).count()

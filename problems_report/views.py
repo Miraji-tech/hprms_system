@@ -20,15 +20,17 @@ def student_reports(request):
 
     # hostel__ = allocate_room.objects.filter(hostel_name_id = F('id'))
     # block__ = allocate_room.objects.filter(block_name_id = F('id'))
-    room__ = allocate_room.objects.filter(room_id = F('id'),block_name_id = F('id'), hostel_name_id = F('id'), student_id = request.user.id )
+    # room__ = allocate_room.objects.filter(room_id = F('id'),block_name_id = F('id'), hostel_name_id = F('id'))
+    allocateroom__ = allocate_room.objects.filter(student_id = request.user.id)
 
     if form.is_valid():
         form.save()
         instance = form.save(commit=False)
         instance.student = request.user
-        instance.hostel = instance.hostel
-        instance.block_name = instance.block_name
-        instance.room_name = instance.room_name
+        instance.allocateroom = instance.allocateroom
+        # instance.hostel = instance.hostel
+        # instance.block_name = instance.block_name
+        # instance.room_name = instance.room_name
         instance.save()
         messages.success(request, "Your problem has been reported successfully")
 
@@ -36,24 +38,27 @@ def student_reports(request):
 
     context = {
         'form': form,
-        'allocate_room' : room__,
-        # 'allocate_room' : hostel__,
-        # 'allocate_room' : block__,
+        'allocate_room' : allocateroom__,
         }
 
     return render(request, 'problems_report/student/student_problem_report_form.html', context)
 
 
+@login_required
 def warden_reports(request):
 
-    block__ = allocate_block.objects.filter(block_name_id = F('id'), hostel_name_id = F('id'), warden_id = request.user.id )
+    # block__ = allocate_block.objects.filter(block_name_id = F('id'), hostel_name_id = F('id'))
     form = wardenReportProblemForm(request.POST)
+    
+    allocateblock__ = allocate_block.objects.filter(warden_id = request.user.id)
+
     if form.is_valid():
         form.save()
         instance = form.save(commit=False)
         instance.warden = request.user
-        instance.hostel = instance.hostel
-        instance.block_name = instance.block_name
+        instance.allocateblock = instance.allocateblock
+        # instance.hostel = instance.hostel
+        # instance.block_name = instance.block_name
         instance.save()
         messages.success(request, "Your problem has been reported successfully")
 
@@ -61,7 +66,7 @@ def warden_reports(request):
 
     context = {
         'form': form,
-        'allocate_block':block__,
+        'allocate_block':allocateblock__,
     }
 
     return render(request, 'problems_report/warden/warden_problem_report_form.html', context)
@@ -70,7 +75,7 @@ def warden_reports(request):
 # A problem reported by a specific student function
 def view_student_reports(request):
 
-    spr = student_report_problem.objects.filter(student_id=request.user.id)
+    spr = student_report_problem.objects.filter(student_id=request.user.id).select_related('allocateroom')
 
     context = {
 
@@ -84,7 +89,7 @@ def view_student_reports(request):
 # All problems reported by all warden function
 def warden_reported_problem(request):
     
-    wardens = warden_report_problem.objects.all()
+    wardens = warden_report_problem.objects.all().select_related('allocateblock')
 
     context = {
         'warden_report_problem': wardens,
@@ -96,7 +101,7 @@ def warden_reported_problem(request):
 def view_reported_problem(request):
 
     # student_in_block = allocate_room.objects.get(student_id=student_report_problem.student_id, block_name = allocate_block.block_name)
-    reports = student_report_problem.objects.all()
+    reports = student_report_problem.objects.all().select_related('allocateroom')
 
     # student_id=student_in_block
 
@@ -112,7 +117,7 @@ def view_reported_problem(request):
 # A problems reported by a single warden function
 def view_warden_report(request):
 
-    wpr = warden_report_problem.objects.filter(warden_id = request.user.id)
+    wpr = warden_report_problem.objects.filter(warden_id = request.user.id).select_related('allocateblock')
 
     context = {
         'warden_report_problem': wpr,
@@ -170,7 +175,7 @@ def warden_problem_feedback_form(request, problem_id):
 @login_required
 def usab_manager_view_students_problem(request):
 
-    reports = student_report_problem.objects.all()
+    reports = student_report_problem.objects.all().select_related('allocateroom')
 
     context = {
 

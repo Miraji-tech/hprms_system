@@ -65,9 +65,9 @@
               </td>
               {% endif %}
               <td>{{reports.student}}</td>
-              <td>{{reports.hostel}}</td>
-              <td>{{reports.block_name}}</td>
-              <td>{{reports.room_name}}</td>
+              <td>{{reports.allocateroom.hostel_name}}</td>
+              <td>{{reports.allocateroom.block_name}}</td>
+              <td>{{reports.allocateroom.room}}</td>
               <td>
                 <a href="{% url 'student_feedback_Form' reports.id %}" class="btn btn-primary">View</a>
             </td>

@@ -55,8 +55,8 @@
               <td>{{wpr.problem_title}}</td>
               <td>{{wpr.details}}</td>
               <td>{{wpr.warden}}</td>
-              <td>{{wpr.hostel}}</td>
-              <td>{{wpr.block_name}}</td>
+              <td>{{wpr.allocateblock.hostel_name}}</td>
+              <td>{{wpr.allocateblock.block_name}}</td>
               {% if user.is_authenticated and user.is_superuser %}
               <td>
                 <a href="{% url 'feedback_Form' wpr.id %}" class="btn btn-primary">View</a>

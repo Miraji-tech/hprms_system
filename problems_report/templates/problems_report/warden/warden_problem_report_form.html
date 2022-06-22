@@ -50,13 +50,17 @@
                   <form class="px-md-2" method="POST" action="#">{% csrf_token %}
 
                   <!--                {{ form|crispy }}-->
-                  {% for bk in allocate_block  %}
-                    <input type="hidden" name="warden" value="{{ bk.warden_id }}" id="id_warden" class="form-control" required>
-                    
+                                    
+                   
+                    <input type="hidden" name="warden" value="1" id="id_warden" class="form-control" required>
+                    {% for bk in allocate_block  %}
+                    <input type="hidden" name="allocateblock" value="{{ bk.id }}" id="id_allocateblock" class="form-control" required>
+                    {% endfor %}
+                    <!-- {% for bk in allocate_block  %}
                     <input type="hidden" name="hostel" value="{{bk.hostel_name_id}}" id="id_hostel" class="form-control" required>
 
                     <input type="hidden" name="block_name" value="{{ bk.block_name_id }}" id="id_block_name" class="form-control" required>
-                    {% endfor %}
+                    {% endfor %} -->
 <!--                    <div class="row">-->
 <!--                      <div class="form-group mb-2 col-md-6">-->
 <!--                        <label for="hostel">Hostel</label>-->
@@ -91,4 +95,3 @@
                   <!-- /.card -->
 </section>
 {% endblock content %}
-
